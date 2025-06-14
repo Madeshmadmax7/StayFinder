@@ -1,0 +1,111 @@
+.custom-calendar-ui {
+  background-color: #0f172a !important;
+  color: white !important;
+  border: none !important;
+  font-family: inherit;
+}
+
+.custom-calendar-ui .rdrMonthAndYearWrapper,
+.custom-calendar-ui .rdrWeekDays {
+  background-color: #0f172a !important;
+  color: white !important;
+}
+
+.custom-calendar-ui .rdrDayNumber span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  color: white;
+  position: relative;
+  z-index: 10;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.custom-calendar-ui .rdrDay {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.custom-calendar-ui .rdrInRange .rdrDayNumber span {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-radius: 9999px;
+}
+
+.custom-calendar-ui .rdrStartEdge .rdrDayNumber span,
+.custom-calendar-ui .rdrEndEdge .rdrDayNumber span {
+  background-color: #1d4ed8 !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 9999px;
+}
+
+/* Remove double-ring from selected dates */
+.custom-calendar-ui .rdrDay.rdrSelected,
+.custom-calendar-ui .rdrDay.rdrStartEdge,
+.custom-calendar-ui .rdrDay.rdrEndEdge {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Disabled dates */
+.custom-calendar-ui .rdrDayDisabled .rdrDayNumber span {
+  color: #64748b !important;
+  background-color: #1e293b !important;
+}
+
+/* Passive month days */
+.custom-calendar-ui .rdrDayPassive .rdrDayNumber span {
+  color: #94a3b8 !important;
+}
+
+/* Inputs and top display */
+.custom-calendar-ui .rdrDateInput {
+  background-color: #1e293b !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.custom-calendar-ui .rdrDateDisplayWrapper,
+.custom-calendar-ui .rdrDateDisplay {
+  background-color: #0f172a !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Prev/Next buttons */
+.custom-calendar-ui .rdrNextPrevButton {
+  background-color: #1e293b !important;
+  color: white !important;
+  border-radius: 0.375rem !important;
+}
+
+.custom-calendar-ui .rdrNextPrevButton:hover {
+  background-color: #2563eb !important;
+}
+
+/* Responsive fix */
+@media (max-width: 768px) {
+  .custom-calendar-ui {
+    min-width: 100% !important;
+  }
+
+  .custom-calendar-ui .rdrCalendarWrapper {
+    width: 100% !important;
+  }
+
+  .custom-calendar-ui .rdrMonthsVertical {
+    flex-direction: column !important;
+  }
+
+  .custom-calendar-ui .rdrMonth {
+    margin-bottom: 1rem;
+  }
+}
