@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { FiWifi, FiCoffee, FiHome, FiBox, FiMapPin } from "react-icons/fi";
 import { DateRange } from "react-date-range";
 import { addDays } from "date-fns";
-import img1 from '../images/dubai.jpg'
+import img1 from '../images/dubai.jpg';
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -50,7 +50,6 @@ useEffect(() => {
 
 return (
     <div className="bg-[#0f172a] text-white min-h-screen pb-20">
-    {/* Hero Section */}
     <header
         className="relative bg-cover bg-center h-[90vh]"
         style={{ backgroundImage: `url(${hotel.image})` }}
@@ -63,12 +62,11 @@ return (
             <span>{hotel.city}</span>
         </div>
         </div>
-
     </header>
 
     <div className="max-w-6xl mx-auto px-4 mt-10 flex flex-col lg:flex-row-reverse gap-10">
         {/* Sidebar */}
-        <div className="w-full lg:w-96 bg-[#111d38] border border-blue-400 rounded-xl p-6 shadow-xl sticky top-24 h-fit">
+        <div className="w-full lg:w-96 bg-[#111d38] border border-blue-400 rounded-xl p-6 shadow-xl lg:sticky lg:top-24 h-fit">
         <h3 className="text-xl font-bold text-white">
             ₹{hotel.price} <span className="text-sm text-blue-600">/night</span>
         </h3>
@@ -122,14 +120,14 @@ return (
         <div className="flex-1">
         {/* Amenities */}
         <h2 className="text-2xl font-bold mb-4">What this place offers</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-9 mb-12">
+        <div className="grid grid-cols-2 gap-4 mt-9 mb-12">
             {hotel.amenities.map((a, i) => (
             <div
                 key={i}
-                className="flex items-center gap-3 bg-blue-800 p-3 rounded-md shadow-md"
+                className="flex flex-col items-center justify-center gap-2 bg-[#1e2b4b] p-4 rounded-lg shadow text-sm text-center"
             >
-                {a.icon}
-                <span>{a.name}</span>
+                <div className="text-xl text-blue-400">{a.icon}</div>
+                <span className="text-white">{a.name}</span>
             </div>
             ))}
         </div>
@@ -137,7 +135,7 @@ return (
         {/* Date Range Picker */}
         <div className="mb-10">
             <h2 className="text-xl font-bold mb-4">Choose Your Dates</h2>
-            <div className="rounded-xl overflow-auto shadow-xl w-full">
+            <div className="rounded-xl overflow-auto shadow-xl w-full flex justify-center">
             <DateRange
                 editableDateInputs={true}
                 onChange={(item) => setDateRange([item.selection])}
@@ -184,21 +182,9 @@ return (
         <div className="mt-10">
             <h2 className="text-xl font-bold mb-4">More Images</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <img
-                className="rounded-md h-40 w-full object-cover"
-                src={img1}
-                alt="Hotel"
-            />
-            <img
-                className="rounded-md h-40 w-full object-cover"
-                src={img1}
-                alt="Room"
-            />
-            <img
-                className="rounded-md h-40 w-full object-cover"
-                src={img1}
-                alt="Resort"
-            />
+            <img className="rounded-md h-40 w-full object-cover" src={img1} alt="Hotel" />
+            <img className="rounded-md h-40 w-full object-cover" src={img1} alt="Room" />
+            <img className="rounded-md h-40 w-full object-cover" src={img1} alt="Resort" />
             </div>
         </div>
         </div>

@@ -1,10 +1,13 @@
 import Navbar from '../components/Navbar'
 import Explore from '../components/Explore'
+
 function ExplorePage() {
     return (
         <>
-            <Navbar/>
-            <Explore/>
+            <Navbar />
+            <div className="pt-12">
+                <Explore />
+            </div>
         </>
     )
 }
