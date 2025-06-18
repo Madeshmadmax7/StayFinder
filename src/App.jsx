@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Booking from './pages/Booking';
 import ExplorePage from './pages/ExplorePage';
 import AuthPage from './pages/AuthPage';
-
+import HotelDetails from './components/HotelDetails'
 const App = () => (
   <>
     <Routes>
@@ -12,6 +12,7 @@ const App = () => (
       <Route path="/explore" element={<ExplorePage />} />
       <Route path="/booking" element={<Booking />} />
       <Route path="/login" element={<AuthPage />} />
+      <Route path="/hotel/:id" element={<HotelDetails />} />
     </Routes>
   </>
 );

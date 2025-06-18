@@ -5,8 +5,15 @@ import { FiMenu, FiX, FiSearch } from 'react-icons/fi';
 const Navbar = () => {
 const [isOpen, setIsOpen] = useState(false);
 const [showSearchBox, setShowSearchBox] = useState(false);
-const toggleMenu = () => setIsOpen(!isOpen);
 const navigate = useNavigate();
+const toggleMenu = () => setIsOpen(!isOpen);
+
+const isLoggedIn = !!localStorage.getItem("token");
+
+const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+};
 
 return (
     <nav className="bg-[#0f172a] text-white w-full fixed top-0 z-50 shadow-md">
@@ -22,16 +29,25 @@ return (
         <Link to="/booking" className="hover:text-cyan-300 transition font-medium">Bookings</Link>
         </div>
 
-        {/* Right Side - Sign In + Search */}
+        {/* Right Side - Auth + Search */}
         <div className="hidden md:flex items-center space-x-4 z-10">
-        <Link
+        {isLoggedIn ? (
+            <button
+            onClick={handleLogout}
+            className="border-2 border-white px-4 py-1.5 rounded-md font-semibold hover:bg-white hover:text-[#0f172a] transition"
+            >
+            Logout
+            </button>
+        ) : (
+            <Link
             to="/login"
             className="border-2 border-white px-4 py-1.5 rounded-md font-semibold hover:bg-white hover:text-[#0f172a] transition"
-        >
+            >
             Sign In
-        </Link>
+            </Link>
+        )}
 
-        {/* Sliding Search Button */}
+        {/* Search */}
         <div className="relative">
             {!showSearchBox ? (
             <button
@@ -81,39 +97,50 @@ return (
         <Link to="/explore" className="text-lg hover:text-cyan-300 transition" onClick={toggleMenu}>Explore</Link>
         <Link to="/booking" className="text-lg hover:text-cyan-300 transition" onClick={toggleMenu}>Bookings</Link>
 
-        <Link
+        {isLoggedIn ? (
+            <button
+            onClick={() => {
+                handleLogout();
+                toggleMenu();
+            }}
+            className="border-2 border-white px-4 py-2 rounded-md text-center font-semibold hover:bg-white hover:text-[#0f172a] transition"
+            >
+            Logout
+            </button>
+        ) : (
+            <Link
             to="/login"
             className="border-2 border-white px-4 py-2 rounded-md text-center font-semibold hover:bg-white hover:text-[#0f172a] transition"
             onClick={toggleMenu}
-        >
-            Sign In
-        </Link>
-
-        {!showSearchBox ? (
-        <button
-            onClick={() => setShowSearchBox(true)}
-            className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-100 transition flex items-center justify-center gap-2"
-        >
-            <FiSearch size={18} />
-            <span className="font-medium">Search</span>
-        </button>
-        ) : (
-        <div className="flex items-center bg-white rounded-md overflow-hidden transition-all duration-300 w-full">
-            <input
-            type="text"
-            placeholder="Search places..."
-            autoFocus
-            className="flex-grow px-4 py-2 bg-white text-black focus:outline-none"
-            />
-            <button
-            onClick={() => setShowSearchBox(false)}
-            className="p-2 text-black hover:text-red-500 transition"
             >
-            <FiX size={20} />
-            </button>
-        </div>
+            Sign In
+            </Link>
         )}
 
+        {!showSearchBox ? (
+            <button
+            onClick={() => setShowSearchBox(true)}
+            className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-100 transition flex items-center justify-center gap-2"
+            >
+            <FiSearch size={18} />
+            <span className="font-medium">Search</span>
+            </button>
+        ) : (
+            <div className="flex items-center bg-white rounded-md overflow-hidden transition-all duration-300 w-full">
+            <input
+                type="text"
+                placeholder="Search places..."
+                autoFocus
+                className="flex-grow px-4 py-2 bg-white text-black focus:outline-none"
+            />
+            <button
+                onClick={() => setShowSearchBox(false)}
+                className="p-2 text-black hover:text-red-500 transition"
+            >
+                <FiX size={20} />
+            </button>
+            </div>
+        )}
         </div>
     </div>
     </nav>

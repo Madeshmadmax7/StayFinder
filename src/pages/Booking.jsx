@@ -1,11 +1,11 @@
-import HotelDetails from "../components/HotelDetails"
+import BookedHotels from "../components/BookedHotels"
 import Navbar from "../components/Navbar"
 
 function Booking() {
 return (
     <>
         <Navbar/>
-        <HotelDetails/>
+        <BookedHotels/>
     </>
 )
 }
