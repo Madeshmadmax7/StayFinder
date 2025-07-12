@@ -18,7 +18,8 @@ const Explore = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/hotels')
+    axios
+      .get('https://stayfinder-backend-v1.onrender.com/api/hotels')
       .then(res => setHotels(res.data))
       .catch(err => console.error('Error fetching hotels:', err));
   }, []);
@@ -37,16 +38,18 @@ const Explore = () => {
 
   const filteredHotels = hotels.filter(hotel => {
     const matchSearch = hotel.name.toLowerCase().includes(search.toLowerCase());
-    const matchPrice = activePrices.length === 0 ||
+    const matchPrice =
+      activePrices.length === 0 ||
       activePrices.some(range => hotel.price >= range.min && hotel.price <= range.max);
-    const matchRating = activeRatings.length === 0 ||
-      activeRatings.includes(Math.floor(hotel.rating));
+    const matchRating =
+      activeRatings.length === 0 || activeRatings.includes(Math.floor(hotel.rating));
     return matchSearch && matchPrice && matchRating;
   });
 
   return (
     <div className="bg-[#0f172a] min-h-screen text-white px-4 py-8 md:px-8">
       <div className="flex flex-col md:flex-row max-w-7xl mx-auto space-y-6 md:space-y-0 md:space-x-6">
+        {/* Sidebar Filters */}
         <aside className="w-full md:w-1/4 bg-[#1e293b] rounded-xl p-4 shadow-md">
           <h3 className="font-bold text-xl mb-4">Search & Filters</h3>
 
@@ -90,13 +93,17 @@ const Explore = () => {
           ))}
         </aside>
 
+        {/* Hotel Cards */}
         <main className="w-full md:w-3/4">
           <h2 className="text-2xl font-bold mb-4">
             Explore: {filteredHotels.length} result(s) found
           </h2>
 
           {filteredHotels.map(hotel => (
-            <div key={hotel.id} className="flex flex-col sm:flex-row border rounded-xl mb-6 overflow-hidden shadow bg-[#1e293b]">
+            <div
+              key={hotel.id}
+              className="flex flex-col sm:flex-row border rounded-xl mb-6 overflow-hidden shadow bg-[#1e293b]"
+            >
               <img
                 src={hotel.mainImage || img1}
                 alt={hotel.name}

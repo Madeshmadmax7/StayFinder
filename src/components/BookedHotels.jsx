@@ -11,11 +11,10 @@ const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
 useEffect(() => {
     const token = localStorage.getItem('token');
-
-    if (!userId) return;
+    if (!userId || !token) return;
 
     axios
-    .get(`http://localhost:8080/api/bookings?userId=${userId}`, {
+    .get(`https://stayfinder-backend-v1.onrender.com/api/bookings?userId=${userId}`, {
         headers: {
         Authorization: `Bearer ${token}`,
         },
@@ -29,7 +28,6 @@ useEffect(() => {
         setLoading(false);
     });
 }, [userId]);
-
 
 if (loading) {
     return (
@@ -65,8 +63,8 @@ return (
             key={index}
             className="bg-[#1e293b] p-5 rounded-lg shadow hover:shadow-lg transition"
         >
-            <h2 className="text-xl font-semibold">{booking.hotel.name}</h2>
-            <p className="text-gray-300">{booking.hotel.city}</p>
+            <h2 className="text-xl font-semibold">{booking.hotel?.name}</h2>
+            <p className="text-gray-300">{booking.hotel?.city}</p>
             <p className="mt-2 text-sm text-gray-400">
             From: {new Date(booking.checkInDate).toLocaleDateString()} <br />
             To: {new Date(booking.checkOutDate).toLocaleDateString()}

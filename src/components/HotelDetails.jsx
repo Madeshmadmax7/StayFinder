@@ -41,7 +41,7 @@ useEffect(() => {
 useEffect(() => {
     const fetchHotel = async () => {
     try {
-        const response = await axios.get(`http://localhost:8080/api/hotels/${id}`);
+        const response = await axios.get(`https://stayfinder-backend-v1.onrender.com/api/hotels/${id}`);
         setHotel(response.data);
     } catch (err) {
         console.error("Error loading hotel:", err);
@@ -89,7 +89,7 @@ const proceedToBooking = async () => {
     };
 
     await axios.post(
-        `http://localhost:8080/api/bookings/create?userId=${user.id}&hotelId=${id}`,
+        `https://stayfinder-backend-v1.onrender.com/api/bookings/create?userId=${user.id}&hotelId=${id}`,
         bookingData,
         {
         headers: {

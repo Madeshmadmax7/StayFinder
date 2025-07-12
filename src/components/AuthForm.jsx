@@ -19,7 +19,7 @@ useEffect(() => {
 
 const handleSignUp = async () => {
     try {
-    await axios.post("http://localhost:8080/api/users", {
+    await axios.post("https://stayfinder-backend-v1.onrender.com/api/users", {
         username,
         email,
         password,
@@ -37,34 +37,33 @@ const handleSignUp = async () => {
 };
 
 const handleSignIn = async () => {
-try {
-    const res = await axios.post("http://localhost:8080/api/users/login", {
+    try {
+    const res = await axios.post("https://stayfinder-backend-v1.onrender.com/api/users/login", {
         email,
         password,
     });
-
 
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("user", JSON.stringify(res.data.user));
 
     const pendingBooking = localStorage.getItem("pendingBooking");
     if (pendingBooking) {
-    const { hotelId } = JSON.parse(pendingBooking);
-    navigate(`/hotel/${hotelId}`);
+        const { hotelId } = JSON.parse(pendingBooking);
+        navigate(`/hotel/${hotelId}`);
     } else {
-    navigate("/");
+        navigate("/");
     }
 
-} catch (err) {
+    } catch (err) {
     console.error(err);
     alert("Invalid email or password.");
-}
+    }
 };
-
 
 return (
     <div className="min-h-screen bg-[#0f172a] text-white flex items-center justify-center px-4 pt-[88px]">
     <div className="relative w-full max-w-5xl h-auto md:h-[500px] overflow-hidden rounded-xl shadow-2xl flex flex-col md:flex-row bg-[#1e293b]">
+        
         {/* Image Section */}
         <div
         className={`hidden md:block md:w-1/2 relative overflow-hidden transition-transform duration-700 ${
@@ -84,7 +83,6 @@ return (
             isSignUp ? "md:-translate-x-full" : "md:translate-x-0"
         }`}
         >
-
         {!isSignUp ? (
             <>
             <h2 className="text-2xl font-bold mb-2">Sign In</h2>

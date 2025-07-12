@@ -32,16 +32,23 @@ useEffect(() => {
 
 return (
     <header
-    className="relative bg-cover bg-center h-[90vh] text-white"
+    className="relative h-[90vh] bg-cover bg-center text-white"
     style={{ backgroundImage: `url(${spot.image})` }}
     >
-    <div className="absolute inset-0 bg-transparent bg-opacity-50"></div>
+    <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+
+    {/* Main Content */}
     <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6">
-        <h1 className="text-4xl md:text-4xl font-bold mb-4">Chase elegance. Reserve your dream stay now.</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        Chase elegance. Reserve your dream stay now.
+        </h1>
         <p className="text-lg text-gray-200">{spot.description}</p>
     </div>
-    <div className="absolute left-1/2 -bottom-10 transform -translate-x-1/2 bg-[#1e293b] text-white shadow-xl rounded-xl w-[95%] max-w-6xl px-4 py-3 md:py-4 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
+
+    {/* Search Bar */}
+    <div className="absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-[95%] max-w-6xl px-4 py-3 md:py-4 bg-[#1e293b] rounded-xl shadow-xl text-white z-20 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full">
+        {/* Location */}
         <div className="flex items-center gap-2 border-r border-gray-600 pr-2">
             <FiMapPin className="text-lg" />
             <div>
@@ -49,6 +56,8 @@ return (
             <p className="text-xs text-gray-300">{spot.location}</p>
             </div>
         </div>
+
+        {/* Check-in */}
         <div className="flex items-center gap-2 border-r border-gray-600 pr-2">
             <FiCalendar className="text-lg" />
             <div>
@@ -56,6 +65,8 @@ return (
             <p className="text-xs text-gray-300">09 Jul 2024</p>
             </div>
         </div>
+
+        {/* Check-out */}
         <div className="flex items-center gap-2 border-r border-gray-600 pr-2">
             <FiCalendar className="text-lg" />
             <div>
@@ -63,6 +74,8 @@ return (
             <p className="text-xs text-gray-300">10 Jul 2024</p>
             </div>
         </div>
+
+        {/* Guests */}
         <div className="flex items-center gap-2">
             <FiUsers className="text-lg" />
             <div>
@@ -71,8 +84,10 @@ return (
             </div>
         </div>
         </div>
+
+        {/* Book Button */}
         <div className="w-full md:w-auto mt-2 md:mt-0 flex justify-center md:justify-end">
-        <button className="bg-yellow-400 text-black px-4 py-2 md:px-5 md:py-2.5 text-sm md:text-base rounded-md font-medium hover:bg-yellow-300 transition w-full md:w-fit">
+        <button className="w-full md:w-fit bg-yellow-400 hover:bg-yellow-300 text-black px-5 py-2.5 rounded-md font-medium transition">
             Book
         </button>
         </div>
