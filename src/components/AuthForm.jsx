@@ -19,20 +19,24 @@ useEffect(() => {
 
 const handleSignUp = async () => {
     try {
-    await axios.post("https://stayfinder-backend-v1.onrender.com/api/users", {
-        username,
-        email,
-        password,
-    });
+        await axios.post("https://stayfinder-backend-v1.onrender.com/api/users", {
+            username,
+            email,
+            password,
+        });
 
-    alert("Sign up successful!");
-    setIsSignUp(false);
-    setUsername("");
-    setEmail("");
-    setPassword("");
+        alert("Sign up successful!");
+        setIsSignUp(false);
+        setUsername("");
+        setEmail("");
+        setPassword("");
     } catch (err) {
-    console.error(err);
-    alert("Sign up failed. Please try again.");
+        console.error(err);
+        if (err.response?.status === 409) {
+            alert("Email already registered. Please sign in.");
+        } else {
+            alert("Sign up failed. Please try again.");
+        }
     }
 };
 
