@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import './index.css';
+import { HotelProvider } from './context/HotelContext'; // ✅ wrap here
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <HotelProvider>
+        <App />
+      </HotelProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
