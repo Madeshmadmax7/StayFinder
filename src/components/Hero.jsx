@@ -45,15 +45,11 @@ return (
         }}
     >
 
-    {/* Dark overlay */}
-    {/* <div className="absolute inset-0 bg-black bg-opacity-40"></div> */}
-
-    {/* Main content */}
     <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4">
         Chase elegance. Reserve your dream stay now.
         </h1>
-        <p className="text-lg text-gray-200">
+        <p className="text-md text-gray-200">
         {selectedHotel.description || 'Explore handpicked stays.'}
         </p>
     </div>
