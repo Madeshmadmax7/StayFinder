@@ -39,11 +39,12 @@ if (!selectedHotel) {
 
 return (
     <header
-    className="relative h-[90vh] bg-cover bg-center bg-no-repeat text-white"
-    style={{
-        backgroundImage: `url("${selectedHotel.mainImage}")`
-    }}
+        className="relative h-[90vh] bg-cover bg-center bg-no-repeat text-white"
+        style={{
+            backgroundImage: `url("${selectedHotel.mainImage}")`
+        }}
     >
+
     {/* Dark overlay */}
     <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
