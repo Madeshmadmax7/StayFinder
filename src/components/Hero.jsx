@@ -46,7 +46,7 @@ return (
     >
 
     {/* Dark overlay */}
-    <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+    {/* <div className="absolute inset-0 bg-black bg-opacity-40"></div> */}
 
     {/* Main content */}
     <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6">
