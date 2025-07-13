@@ -7,7 +7,7 @@ const HotelSection = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("https://stayfinder-backend-pmed.onrender.com/api/hotels")
+    fetch("https://stayfinder-backend-v1.onrender.com/api/hotels")
       .then((res) => res.json())
       .then((data) => {
         setHotels(data);
