@@ -39,13 +39,16 @@ if (!selectedHotel) {
 
 return (
     <header
-        className="relative h-[90vh] bg-cover bg-center bg-no-repeat text-white"
-        style={{
-            backgroundImage: `url("${selectedHotel.mainImage}")`
-        }}
+    className="relative h-[90vh] bg-cover bg-center bg-no-repeat"
+    style={{
+        backgroundImage: `url("${selectedHotel.mainImage}")`
+    }}
     >
+    {/* Gradient Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-0" />
 
-    <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6">
+    {/* Text Content */}
+    <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6 text-white">
         <h1 className="text-2xl md:text-3xl font-bold mb-4">
         Chase elegance. Reserve your dream stay now.
         </h1>
