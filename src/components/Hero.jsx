@@ -7,18 +7,20 @@ const [hotels, setHotels] = useState([]);
 const [selectedHotel, setSelectedHotel] = useState(null);
 const navigate = useNavigate();
 
-// Fetch hotel data
+// Fetch hotels
 useEffect(() => {
     fetch('https://stayfinder-backend-v1.onrender.com/api/hotels')
-    .then((res) => res.json())
-    .then((data) => {
+    .then(res => res.json())
+    .then(data => {
+        console.log("Fetched hotels:", data);
         setHotels(data);
         if (data.length > 0) {
-        const randomHotel = data[Math.floor(Math.random() * data.length)];
-        setSelectedHotel(randomHotel);
+        const random = data[Math.floor(Math.random() * data.length)];
+        console.log("Selected hotel:", random);
+        setSelectedHotel(random);
         }
     })
-    .catch((err) => console.error('Failed to fetch hotels:', err));
+    .catch(err => console.error('Failed to fetch hotels:', err));
 }, []);
 
 const handleBookClick = () => {
@@ -37,17 +39,22 @@ if (!selectedHotel) {
 
 return (
     <header
-    className="relative h-[90vh] bg-cover bg-center text-white"
-    style={{ backgroundImage: `url(${selectedHotel.mainImage})` }}
+    className="relative h-[90vh] bg-cover bg-center bg-no-repeat text-white"
+    style={{
+        backgroundImage: `url("${selectedHotel.mainImage}")`
+    }}
     >
+    {/* Dark overlay */}
     <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
-    {/* Main Content */}
+    {/* Main content */}
     <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
         Chase elegance. Reserve your dream stay now.
         </h1>
-        <p className="text-lg text-gray-200">{selectedHotel.description || 'Explore handpicked stays.'}</p>
+        <p className="text-lg text-gray-200">
+        {selectedHotel.description || 'Explore handpicked stays.'}
+        </p>
     </div>
 
     {/* Search Bar */}

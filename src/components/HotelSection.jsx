@@ -64,7 +64,7 @@ const HotelSection = () => {
         <h2 className="text-2xl font-bold mb-2">Category</h2>
         <div className="w-16 h-1 bg-yellow-400 mb-6"></div>
         <div className="flex space-x-4 overflow-x-auto scrollbar-hide sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 sm:space-x-0 sm:gap-6">
-          {renderHotelList(5, 5)}
+          {renderHotelList(5)}
         </div>
       </section>
     </div>
