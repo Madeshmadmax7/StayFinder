@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import HotelCard from './HotelCard';
 import { HotelContext } from '../context/HotelContext';
 
@@ -6,6 +7,7 @@ const HotelSection = () => {
   const { hotels, loading, error } = useContext(HotelContext);
   const [topRated, setTopRated] = useState([]);
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (hotels.length > 0) {
@@ -25,6 +27,7 @@ const HotelSection = () => {
           price={hotel.price}
           location={hotel.city}
           image={hotel.mainImage || '/default.jpg'}
+          onClick={() => navigate(`/hotel/${hotel.id}`)}
         />
       </div>
     ));
@@ -47,7 +50,6 @@ const HotelSection = () => {
 
   return (
     <div className="bg-[#0f172a] text-white px-6 py-12">
-      {/* Top Rated Section */}
       <section className="mb-12 max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold mb-2">Top Rated</h2>
         <div className="w-16 h-1 bg-yellow-400 mb-6"></div>
@@ -55,8 +57,7 @@ const HotelSection = () => {
           {renderHotelList(topRated)}
         </div>
       </section>
-
-      {/* Category Section */}
+      
       <section className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold mb-2">Category</h2>
         <div className="w-16 h-1 bg-yellow-400 mb-6"></div>
