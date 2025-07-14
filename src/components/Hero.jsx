@@ -36,12 +36,15 @@ return (
         backgroundImage: `url("${selectedHotel.mainImage}")`,
     }}
     >
+    {/* Dark Overlay */}
+    <div className="absolute inset-0 bg-black bg-opacity-60 z-0" />
+
     {/* Text Content */}
-    <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6 text-black">
-        <h1 className="text-2xl md:text-3xl font-bold mb-4">
-        Chase elegance. Reserve your dream stay now.
+    <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6 text-white">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-snug">
+        Escape to luxury. Discover unforgettable stays.
         </h1>
-        <p className="text-md text-gray-200">
+        <p className="text-lg md:text-xl text-gray-200 max-w-3xl">
         {selectedHotel.description || 'Explore handpicked stays.'}
         </p>
     </div>
