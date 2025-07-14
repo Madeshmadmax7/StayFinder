@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiCalendar, FiMapPin, FiUsers } from 'react-icons/fi';
+import { HotelContext } from '../context/HotelContext';
 
 const Hero = () => {
-const [hotels, setHotels] = useState([]);
+const { hotels, loading } = useContext(HotelContext);
 const [selectedHotel, setSelectedHotel] = useState(null);
 const navigate = useNavigate();
 
-// Fetch hotels
 useEffect(() => {
-    fetch('https://stayfinder-backend-v1.onrender.com/api/hotels')
-    .then(res => res.json())
-    .then(data => {
-        console.log("Fetched hotels:", data);
-        setHotels(data);
-        if (data.length > 0) {
-        const random = data[Math.floor(Math.random() * data.length)];
-        console.log("Selected hotel:", random);
-        setSelectedHotel(random);
-        }
-    })
-    .catch(err => console.error('Failed to fetch hotels:', err));
-}, []);
+    if (!loading && hotels.length > 0) {
+    const random = hotels[Math.floor(Math.random() * hotels.length)];
+    setSelectedHotel(random);
+    }
+}, [loading, hotels]);
 
 const handleBookClick = () => {
     if (selectedHotel) {
@@ -29,7 +21,7 @@ const handleBookClick = () => {
     }
 };
 
-if (!selectedHotel) {
+if (loading || !selectedHotel) {
     return (
     <div className="h-[90vh] flex items-center justify-center text-white text-lg bg-[#0f172a]">
         Loading your dream stay...
@@ -41,10 +33,9 @@ return (
     <header
     className="relative h-[90vh] bg-cover bg-center bg-no-repeat"
     style={{
-        backgroundImage: `url("${selectedHotel.mainImage}")`
+        backgroundImage: `url("${selectedHotel.mainImage}")`,
     }}
     >
-
     {/* Text Content */}
     <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6 text-white">
         <h1 className="text-2xl md:text-3xl font-bold mb-4">

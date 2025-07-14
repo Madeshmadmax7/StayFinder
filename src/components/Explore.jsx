@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import img1 from '../images/dubai.jpg';
-import { FiStar } from 'react-icons/fi';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiStar } from 'react-icons/fi';
+import { HotelContext } from '../context/HotelContext';
+import img1 from '../images/dubai.jpg';
 
 const priceRanges = [
   { label: "₹ 0 - ₹ 2000", min: 0, max: 2000 },
@@ -11,18 +11,11 @@ const priceRanges = [
 ];
 
 const Explore = () => {
-  const [hotels, setHotels] = useState([]);
+  const { hotels, loading } = useContext(HotelContext);
   const [search, setSearch] = useState('');
   const [activePrices, setActivePrices] = useState([]);
   const [activeRatings, setActiveRatings] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get('https://stayfinder-backend-v1.onrender.com/api/hotels')
-      .then(res => setHotels(res.data))
-      .catch(err => console.error('Error fetching hotels:', err));
-  }, []);
 
   const togglePrice = (range) => {
     setActivePrices(prev =>
@@ -96,10 +89,10 @@ const Explore = () => {
         {/* Hotel Cards */}
         <main className="w-full md:w-3/4">
           <h2 className="text-2xl font-bold mb-4">
-            Explore: {filteredHotels.length} result(s) found
+            {loading ? 'Loading hotels...' : `Explore: ${filteredHotels.length} result(s) found`}
           </h2>
 
-          {filteredHotels.map(hotel => (
+          {!loading && filteredHotels.map(hotel => (
             <div
               key={hotel.id}
               className="flex flex-col sm:flex-row border rounded-xl mb-6 overflow-hidden shadow bg-[#1e293b]"

@@ -1,36 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import HotelCard from './HotelCard';
+import { HotelContext } from '../context/HotelContext';
 
 const HotelSection = () => {
-  const [hotels, setHotels] = useState([]);
+  const { hotels, loading, error } = useContext(HotelContext);
   const [topRated, setTopRated] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("https://stayfinder-backend-v1.onrender.com/api/hotels")
-      .then((res) => res.json())
-      .then((data) => {
-        setHotels(data);
-        setLoading(false);
-
-        // Shuffle array
-        const shuffled = [...data].sort(() => 0.5 - Math.random());
-
-        // Get topRated and category (ensure no overlap)
-        const top = shuffled.slice(0, 5);
-        const category = shuffled.slice(5, 10);
-
-        setTopRated(top);
-        setCategories(category);
-      })
-      .catch((err) => {
-        console.error("Error fetching hotels:", err);
-        setError(true);
-        setLoading(false);
-      });
-  }, []);
+    if (hotels.length > 0) {
+      const shuffled = [...hotels].sort(() => 0.5 - Math.random());
+      const top = shuffled.slice(0, 5);
+      const category = shuffled.slice(5, 10);
+      setTopRated(top);
+      setCategories(category);
+    }
+  }, [hotels]);
 
   const renderHotelList = (list) =>
     list.map((hotel, idx) => (
