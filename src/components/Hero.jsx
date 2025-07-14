@@ -37,13 +37,13 @@ return (
             backgroundImage: `url("${selectedHotel.mainImage}")`,
         }}
         >
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/30" />
 
         <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6 text-white">
             <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-snug">
             Escape to luxury. Discover unforgettable stays.
             </h1>
-            <p className="text-lg md:text-xl text-gray-200 max-w-3xl">
+            <p className="text-md md:text-xl text-white max-w-3xl">
             {selectedHotel.description || 'Explore handpicked stays.'}
             </p>
         </div>
