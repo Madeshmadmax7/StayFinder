@@ -37,7 +37,7 @@ return (
     }}
     >
     {/* Text Content */}
-    <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6 text-white">
+    <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-center px-6 text-black">
         <h1 className="text-2xl md:text-3xl font-bold mb-4">
         Chase elegance. Reserve your dream stay now.
         </h1>

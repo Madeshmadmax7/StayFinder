@@ -1,26 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiMenu, FiX, FiSearch } from 'react-icons/fi';
+import { HotelContext } from '../context/HotelContext';
 
 const Navbar = () => {
 const [isOpen, setIsOpen] = useState(false);
 const [showSearchBox, setShowSearchBox] = useState(false);
-const [searchQuery, setSearchQuery] = useState("");
+const [searchQuery, setSearchQuery] = useState('');
+const [searchPlaceholder, setSearchPlaceholder] = useState('Search places...');
 const navigate = useNavigate();
 
 const toggleMenu = () => setIsOpen(!isOpen);
+const isLoggedIn = !!localStorage.getItem('token');
 
-const isLoggedIn = !!localStorage.getItem("token");
+const { hotels } = useContext(HotelContext);
 
 const handleLogout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate('/login');
+};
+
+const handleSearch = () => {
+    if (!searchQuery.trim()) return;
+
+    const lower = searchQuery.trim().toLowerCase();
+
+    const foundHotel = hotels.find(hotel =>
+    hotel.name.toLowerCase().includes(lower) ||
+    hotel.city.toLowerCase().includes(lower)
+    );
+
+    if (foundHotel) {
+    setShowSearchBox(false);
+    setSearchQuery('');
+    setSearchPlaceholder('Search places...');
+    navigate(`/hotel/${foundHotel.id}`);
+    } else {
+    setSearchQuery('');
+    setSearchPlaceholder('Not available');
+    }
+};
+
+const handleSearchKey = (e) => {
+    if (e.key === 'Enter') {
+    handleSearch();
+    }
 };
 
 return (
     <nav className="bg-[#0f172a] text-white w-full fixed top-0 z-50 shadow-md">
     <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
-        
         {/* Logo */}
         <div className="text-2xl font-bold tracking-wider z-10">StayFinder</div>
 
@@ -62,16 +91,24 @@ return (
             <div className="flex items-center bg-white rounded-md overflow-hidden w-72">
                 <input
                 type="text"
-                placeholder="Search places..."
+                placeholder={searchPlaceholder}
                 autoFocus
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKey}
                 className="flex-grow px-4 py-2 bg-white text-black focus:outline-none"
                 />
                 <button
+                onClick={handleSearch}
+                className="px-3 text-black hover:text-blue-600"
+                >
+                <FiSearch />
+                </button>
+                <button
                 onClick={() => {
                     setShowSearchBox(false);
-                    setSearchQuery("");
+                    setSearchQuery('');
+                    setSearchPlaceholder('Search places...');
                 }}
                 className="p-2 text-black hover:text-red-500 transition"
                 >
@@ -122,6 +159,7 @@ return (
             </Link>
         )}
 
+        {/* Search in mobile */}
         {!showSearchBox ? (
             <button
             onClick={() => setShowSearchBox(true)}
@@ -134,16 +172,24 @@ return (
             <div className="flex items-center bg-white rounded-md overflow-hidden w-full">
             <input
                 type="text"
-                placeholder="Search places..."
+                placeholder={searchPlaceholder}
                 autoFocus
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKey}
                 className="flex-grow px-4 py-2 bg-white text-black focus:outline-none"
             />
             <button
+                onClick={handleSearch}
+                className="px-3 text-black hover:text-blue-600"
+            >
+                <FiSearch />
+            </button>
+            <button
                 onClick={() => {
                 setShowSearchBox(false);
-                setSearchQuery("");
+                setSearchQuery('');
+                setSearchPlaceholder('Search places...');
                 }}
                 className="p-2 text-black hover:text-red-500 transition"
             >
